@@ -1,0 +1,23 @@
+<div class="product mb-6 w-full" style="    border-bottom: 1px solid #37383D;">
+    <div class="flex gap-4">
+        <div>
+            <img defaultImage="assets/images/default-product.webp" [lazyLoad]="product.data.image"
+                [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+        </div>
+        <div class="flex-1">
+            <a [routerLink]="'/product/' + product.data.id" class="product-title block">{{language == "en" ?
+                product.data.title_en
+                :
+                product.data.title_ar}}</a>
+            <p class="text-[#A0A0A0] mb-1.5 text-sm">{{language == "en" ? product.data.desc1_en :
+                product.data.desc1_ar}}</p>
+            <div class="flex justify-between items-center">
+                <p class="text-[#F13D5D] text-sm">{{getPrice() | formatNumber}} {{'JD' | translate}}</p>
+                <app-counter [counter]="product.counter" [allowZero]="true" (plusEmiter)="plus($event)"
+                    (minusEmiter)="minus($event)" (removeEmiter)="remove($event,product.data.id)">
+                </app-counter>
+                <!-- <p class="text-[#A0A0A0] text-sm">{{language == "en" ? product.data.desc2_en : product.data.desc2_ar}}</p> -->
+            </div>
+        </div>
+    </div>
+</div>

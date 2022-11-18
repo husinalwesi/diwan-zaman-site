@@ -1,0 +1,106 @@
+<div class="min-h-screen h-full" style="display: flex;
+flex-direction: column;">
+    <h1 class="title text-white">
+        {{'Basket' | translate}}
+    </h1>
+    <div>
+        <div class="w-full">
+            <div class="products-cart">
+                <app-product-cart *ngFor="let product of products; let i = index" class="w-full px-8 flex"
+                    [product]="product" (removeEmiter)="remove(i)" (changeQTY)="changeQTY($event,i)">
+                </app-product-cart>
+            </div>
+            <div class="bg-[#25262b] px-8 flex flex-col py-4 border-l border-r border-[#1b1c21]">
+                <div>
+                    <p class="text">{{'Available Options at Checkout:' | translate}}</p>
+                </div>
+                <div class="flex flex-col lg:flex-row">
+                    <div class="w-full lg:w-[calc(50%-1rem)]">
+                        <div>
+                            <p class="text">{{'Delivery methods' | translate}}</p>
+                        </div>
+                        <div class="flex ">
+                            <div class="flex items-center gap-2 w-[calc(50%-1rem)]">
+                                <div>
+                                    <span class="icon">
+                                        <img defaultImage="assets/images/default.jpg"
+                                            lazyLoad="assets/images/pick-up.webp" class="w-[14px] h-[16px]"
+                                            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+                                    </span>
+                                </div>
+                                <div>
+                                    <p class="text-[#D6D6D6] text-[1rem]">{{'Pick up' | translate}}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 w-[calc(50%-1rem)]">
+                                <div>
+                                    <span class="icon">
+                                        <img defaultImage="assets/images/default.jpg"
+                                            lazyLoad="assets/images/delivery.webp" class="w-[20px] h-[16px]"
+                                            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+                                    </span>
+                                </div>
+                                <div>
+                                    <p class="text-[#D6D6D6] text-[1rem]">{{'Delivery' | translate}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-[calc(50%-1rem)]">
+                        <div>
+                            <p class="text">{{'Payment methods' | translate}}</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <div>
+                                    <span class="icon">
+                                        <img defaultImage="assets/images/default.jpg"
+                                            lazyLoad="assets/images/cash-on-delivery.webp" class="w-[16px] h-[16px]"
+                                            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+                                    </span>
+                                </div>
+                                <div>
+                                    <p class="text-[#D6D6D6] text-[1rem]">{{'Cash On Delivery' | translate}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h-40"></div>
+    <div class="fixed bg-[#1b1c21] bottom-0 left-auto right-auto w-full text-center py-6 max-w-[853px]"
+        style="    margin-top: auto;    box-shadow: 0px -8px 8px -8px rgb(0 0 0 / 20%);">
+        <button type="button" routerLink="/checkout"
+            class="flex flex-row justify-between py-[9px] gap-2 bg-[#F13D5D] hover:bg-[#ff1744] w-full rounded-md max-w-[350px] lg:max-w-[400px] items-center px-4"
+            style="    width: 90%;
+margin: 0 auto;">
+            <div style="            min-width: 30px;
+                min-height: 30px;">
+                <span style="    color: white;
+                    border: solid 2pt #ffffff;
+                    font-size: 75%;
+                    text-align: center;
+                    white-space: nowrap;
+                    min-width: 30px;
+                    min-height: 30px;
+                    display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+                    font-weight: normal;">{{cart.qty}}</span>
+            </div>
+            <div class="flex-1">
+                <p style="    justify-content: center;font-size:16px" class="text-white">{{'Checkout' |
+                    translate}}</p>
+            </div>
+            <div class="text-right">
+                <p class="text-white min-w-[65px]" style="font-size:16px;white-space: nowrap;">{{cart.price |
+                    formatNumber}}
+                    {{'JD' |
+                    translate}}</p>
+            </div>
+        </button>
+    </div>
+</div>

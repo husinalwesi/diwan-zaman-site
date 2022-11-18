@@ -1,0 +1,10 @@
+{
+    "/ACADEMYATI_API": {
+        "target": "http://acadeymati-backend.drupaldev.ihorizons.com",
+        "secure": false,
+        "pathRewrite": {
+            "^/ACADEMYATI_API": ""
+        },
+        "changeOrigin": true
+    }
+}

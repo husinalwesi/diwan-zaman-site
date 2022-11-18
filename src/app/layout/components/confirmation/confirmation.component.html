@@ -1,0 +1,29 @@
+<div class="min-h-screen h-full" style="display: flex;
+flex-direction: column;">
+    <div class="flex flex-1 items-center justify-center">
+        <div class="flex flex-col px-4">
+            <img defaultImage="assets/images/default.jpg" lazyLoad="assets/images/done.webp"
+                [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" class="w-full h-full" style="    max-width: 140px;
+                margin: 0 auto;" />
+            <p class="text-lg text-white mt-16 text-center">
+                {{'The request was successfully completed' | translate}}
+            </p>
+            <p class="text-lg text-white mt-1 text-center">
+                {{'We will contact you soon!' | translate}}
+            </p>
+            <p class="text-lg text-white mt-1 text-center">
+                {{'Thanks' | translate}}
+            </p>
+        </div>
+    </div>
+    <div class="h-40"></div>
+    <div class="fixed bg-[#1b1c21] bottom-0 left-auto right-auto w-full text-center py-6 max-w-[853px]"
+        style="    margin-top: auto;    box-shadow: 0px -8px 8px -8px rgb(0 0 0 / 20%);">
+        <button type="button" routerLink="/"
+            class="flex flex-row py-[9px] gap-2 bg-[#F13D5D] hover:bg-[#ff1744] w-full rounded-md max-w-[350px] lg:max-w-[400px] items-center px-4 text-center justify-center text-white h-12"
+            style="    width: 90%;
+margin: 0 auto;    font-size: 16px;">
+            {{'Back to home page' | translate}}
+        </button>
+    </div>
+</div>

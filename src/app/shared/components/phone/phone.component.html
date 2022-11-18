@@ -1,0 +1,10 @@
+<form #f="ngForm" [formGroup]="phoneForm">
+    <div #phoneEle>
+        <ngx-intl-tel-input [class.errorInvalid]="isSubmit && !f.form.valid" [phoneValidation]="true"
+            [selectedCountryISO]="CountryISO.Jordan" name="phone" formControlName="phone">
+        </ngx-intl-tel-input>
+        <span *ngIf="isSubmit && !f.form.valid"
+            class="block text-[#e83d3d] mt-0.5 ltr:text-right rtl:text-left ltr:text-sm rtl:text-xs font-DINRegular">{{'THIS_FIELD_IS_REQUIRED'
+            |translate}}</span>
+    </div>
+</form>

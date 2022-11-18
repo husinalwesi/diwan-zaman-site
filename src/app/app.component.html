@@ -1,0 +1,60 @@
+<div class="bg-[#25262b] h-full">
+    <div class="max-w-[853px] w-full bg-[#1b1c21] mx-auto h-full">
+        <router-outlet></router-outlet>
+        <div *ngIf="whenToShowButton()" class="fixed bottom-0 left-auto right-auto w-full lg:max-w-[853px] h-20" style="background-color: #1b1c21;    display: flex;
+align-items: center;    left: 0;
+    right: 0;
+    margin: 0 auto;">
+            <button (click)="submit()"
+                class="flex flex-row justify-between py-[9px] gap-2 bg-[#F13D5D] hover:bg-[#ff1744] w-full rounded-md max-w-[350px] lg:max-w-[400px] items-center px-4"
+                style="    width: 90%;
+    margin: 0 auto;">
+                <ng-container *ngIf="buttonType == 'view'">
+                    <div style="            min-width: 30px;
+                    min-height: 30px;">
+                        <span style="    color: white;
+                        border: solid 2pt #ffffff;
+                        font-size: 75%;
+                        text-align: center;
+                        white-space: nowrap;
+                        min-width: 30px;
+                        min-height: 30px;
+                        display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                        font-weight: normal;">{{cart.qty}}</span>
+                    </div>
+                    <div class="flex-1">
+                        <p style="    justify-content: center;font-size:16px" class="text-white">{{'View Basket' |
+                            translate}}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-white" style="font-size:16px;white-space: nowrap;">{{cart.price | formatNumber}}
+                            {{'JD' |
+                            translate}}</p>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="buttonType == 'addToBasket'">
+                    <p style="    justify-content: center;font-size:16px;    margin: 0 auto;" class="text-white">{{'Add
+                        to Basket' |
+                        translate}}</p>
+                </ng-container>
+                <ng-container *ngIf="buttonType == 'back'">
+                    <p style="    justify-content: center;font-size:16px;    margin: 0 auto;" class="text-white">
+                        {{'Back' |
+                        translate}}</p>
+                </ng-container>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="isShown()" class="back-btn" routerLink="/">
+        <img class="w-[18px] h-[17px]" defaultImage="assets/images/default.jpg" lazyLoad="assets/images/back.webp"
+            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+    </div>
+</div>
+<!-- https://www.npmjs.com/package/ng-image-video-gallery -->
+<ng-image-fullscreen-view [images]="imageObject" imageIndex="0" [show]="showFlag" [videoAutoPlay]="true"
+    (close)="hideFullScreen()">
+</ng-image-fullscreen-view>
+<app-loader></app-loader>

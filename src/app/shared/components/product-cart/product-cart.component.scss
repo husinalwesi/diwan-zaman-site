@@ -1,0 +1,16 @@
+.product{
+    @apply pb-4;
+    .product-title{
+        font-size: 14px;
+        color: #D6D6D6;
+        @apply mb-1;
+    }
+    img{
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        object-fit: cover;
+        object-position: 50% 50%;
+        width: 64pt;
+        height: 64pt;
+    }
+}

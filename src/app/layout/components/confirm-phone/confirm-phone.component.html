@@ -1,0 +1,93 @@
+<div class="min-h-screen h-full" style="display: flex;
+flex-direction: column;    align-items: center;
+    justify-content: center;">
+
+    <div class="mt-32 text-white">
+        <div>
+            <p class="mb-6" style="    font-size: 20px;
+    font-weight: 500;
+    color: #D6D6D6;
+    text-align: center;">
+                {{'Enter your verification code' | translate}}
+            </p>
+
+            <p class="mb-4" style="    color: #A0A0A0;
+    font-size: 14px;
+    text-align: center;">
+                {{'We have sent a verification code via SMS to' | translate}}
+            </p>
+            <div class="flex mb-4 justify-center">
+                <p class="text-[#D6D6D6]" style="    font-size: 14px;
+        text-align: center;
+        font-weight: bold;">
+                    {{phoneNum}}
+                </p>
+                <!-- <p class=" ltr:ml-2 rtl:mr-2" style="    font-size: 14px;
+        text-align: center;
+        font-weight: bold;    color: #ef5350;
+cursor: pointer;">
+                    ({{'CHANGE NUMBER' | translate}})
+                </p> -->
+            </div>
+        </div>
+        <div class="flex max-w-[300px] mb-12 justify-between mx-auto">
+            <input #phone1Ele type="tel" pattern="[0-9]" inputmode="numeric" class="phone" name="phone1"
+                [(ngModel)]="phone1" id="num_1" moveNextByMaxLength [nextElem]="'num_2'" maxlength="1" />
+            <input #phone2Ele type="tel" pattern="[0-9]" inputmode="numeric" class="phone" name="phone2"
+                [(ngModel)]="phone2" id="num_2" moveNextByMaxLength [nextElem]="'num_3'" maxlength="1" />
+            <input #phone3Ele type="tel" pattern="[0-9]" inputmode="numeric" class="phone" name="phone3"
+                [(ngModel)]="phone3" id="num_3" moveNextByMaxLength [nextElem]="'num_4'" maxlength="1" />
+            <input #phone4Ele type="tel" pattern="[0-9]" inputmode="numeric" class="phone" name="phone4"
+                [(ngModel)]="phone4" id="num_4" maxlength="1" />
+        </div>
+
+        <p class="" style="    font-size: 14px;
+        color: #ef5350;
+        text-align: center;" *ngIf="isSubmit && isError">
+            {{'The code is incorrect, please check your code and try again' | translate}}
+        </p>
+
+        <div class=" mt-4" style="max-width: 340px;    color: #A0A0A0;
+        font-size: 14px;
+        text-align: center;">
+            <p class="mb-4">
+                {{"Didn't receive a verification code?" | translate}}
+            </p>
+            <p (click)="resendCode()" style="    color: #F13D5D;
+            cursor: pointer;
+            font-weight: 600;">
+                {{'RESEND CODE' | translate}}
+            </p>
+        </div>
+        <!-- <p>Phone confirmation screen</p>
+
+        <a routerLink="/confirmation">Click here</a> -->
+    </div>
+    <!-- <div class="flex flex-1 items-center justify-center">
+        <div class="flex flex-col px-4">
+            <img defaultImage="assets/images/default.jpg" lazyLoad="assets/images/done.webp"
+                [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" class="w-full h-full" style="    max-width: 140px;
+                margin: 0 auto;" />
+            <p class="text-lg text-white mt-16 text-center">
+                {{'The request was successfully completed' | translate}}
+            </p>
+            <p class="text-lg text-white mt-1 text-center">
+                {{'We will contact you soon!' | translate}}
+            </p>
+            <p class="text-lg text-white mt-1 text-center">
+                {{'Thanks' | translate}}
+            </p>
+        </div>
+    </div>
+ -->
+    <div class="h-40"></div>
+    <div class="fixed bg-[#1b1c21] bottom-0 left-auto right-auto w-full text-center py-6 max-w-[853px]"
+        style="    margin-top: auto;    box-shadow: 0px -8px 8px -8px rgb(0 0 0 / 20%);">
+        <button type="button" (click)="submit()"
+            class="flex flex-row py-[9px] gap-2 bg-[#F13D5D] hover:bg-[#ff1744] w-full rounded-md max-w-[350px] lg:max-w-[400px] items-center px-4 text-center justify-center text-white h-12"
+            style="    width: 90%;
+margin: 0 auto;    font-size: 16px;">
+            {{'Verify' | translate}}
+        </button>
+    </div>
+</div>

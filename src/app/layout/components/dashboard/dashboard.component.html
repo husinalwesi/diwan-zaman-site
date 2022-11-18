@@ -1,0 +1,125 @@
+<div *ngIf="isClosed" class="bg-[#ff8f00] min-h-[53px] flex items-center justify-center announcment">
+    <p class="px-4 text-white text-center text-sm">{{"Sorry, we're not accepting orders at the moment. We will be
+        accepting orders" | translate}}
+        <a class="underline" href="javascript:void(0);">{{'Today at' | translate}}
+            {{time.startTime}} {{getStartHour() >= 12 ? ('pm' | translate) :('am' |
+            translate)}}</a>
+    </p>
+</div>
+<div class="relative">
+    <div class="hero-container h-[238px] flex">
+        <img class="w-full max-h-[238px]" defaultImage="assets/images/default.jpg" [lazyLoad]="banner1"
+            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" style="    height: auto;
+            margin: auto;" />
+
+        <!-- <div style="background-image: url('assets/images/default.jpg');" lazyLoad="assets/images/banner.gif"
+            class="w-full h-[238px] back-img"></div> -->
+
+        <!-- <a href="javascript:void(0);" class="language-switch ltr:right-3 rtl:left-3 cursor-pointer z-50"
+            (click)="setLanguage(language === 'en' ? 'ar' : 'en')">
+            {{language === 'en' ? 'عربي' : 'En'}}</a> -->
+    </div>
+    <div
+        class="flex flex-row gap-4 items-center mx-4 lg:mx-8 absolute bottom-[-30px] lg:bottom-[-38px] ltr:left-0 rtl:right-0">
+        <div class="w-16 h-16 lg:w-[85px] lg:h-[85px]">
+            <img class="w-16 h-16 lg:w-[85px] lg:h-[85px] rounded-full bg-white"
+                defaultImage="assets/images/default.jpg" lazyLoad="assets/images/logo.webp"
+                [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+        </div>
+        <div class="flex flex-col gap-3 flex-1">
+            <p class="text-white text-2xl main-title">{{'resturant_name' | translate}}</p>
+            <p class="text-white sub-title">{{'Arabic Restaurant - Grill Restaurant' | translate}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="h-[70px]"></div>
+<div class="x-search-input flex-row p-4 align-items-center">
+    <div class="input-container flex flex-grow flex-row" (click)="toggleSearch(true)">
+        <img defaultImage="assets/images/default.jpg" class="icon-search" lazyLoad="assets/images/search.webp"
+            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+        <input type="text" [(ngModel)]="search" [placeholder]="'Search for menu items' | translate" />
+    </div>
+</div>
+
+<div class="relative h-[52px] w-full">
+    <div #tabs>
+        <!-- {{list | json}} -->
+        <ul class="categories-tab hide-scroll">
+            <li *ngFor="let item of list; let i = index" [class.active]="activeTab ? item.id == activeTab : i == 0"
+                (click)="setSelectedTab(item.id)">
+                <span style="white-space: nowrap;">{{language === 'en' ? item.title_en : item.title_ar}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="mt-[20px] px-8 mb-11">
+    <img defaultImage="assets/images/default.jpg" [lazyLoad]="banner2" [errorImage]="'' | errorImage" [useSrcset]="true"
+        alt="image" style="    border-radius: 3px;" />
+</div>
+
+<div class="flex flex-col gap-4 px-8 mb-8">
+    <div class="collapse" *ngFor="let item of list" [class.active]="item.id == activeTab || activeTab === 'all'"
+        [attr.id]="'section-' + item.id">
+        <div class="head" (click)="setSelectedTab(item.id)">
+            <div>
+                <div class="flex gap-1">
+                    <span class="summary-title">{{language === 'en' ? item.title_en : item.title_ar}}</span>
+                    <sub class="mt-1">({{item.data.length}})</sub>
+                </div>
+                <div class="w-3 h-2">
+                    <img defaultImage="assets/images/default.jpg" class="w-3 h-2" lazyLoad="assets/images/arrow.webp"
+                        [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="flex flex-row gap-x-8 gap-y-4 flex-wrap py-5 products px-4">
+                <ng-container *ngFor="let product of item.data; let i = index">
+                    <app-product class="w-full lg:w-[calc(50%-1rem)]" [product]="product"></app-product>
+                    <div class="hr w-full" [class.odd-line]="i % 2 == 0">
+                        <hr class="border-[#37383D]" />
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+
+
+<div class="bg-[#1b1c21] w-full h-full fixed top-0 left-auto right-auto max-w-[853px] z-50 search-panel"
+    [class.active]="searchModal">
+    <div class="x-search-input flex-row p-4 align-items-center flex">
+        <div class="input-container flex flex-grow flex-row">
+            <img class="icon-search" defaultImage="assets/images/default.jpg" lazyLoad="assets/images/search.webp"
+                [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+            <input type="text" [(ngModel)]="search" [placeholder]="'Search for menu items' | translate" />
+            <img *ngIf="search" (click)="search = '';changeInput($event)"
+                class="w-4 h-4 ltr:mr-2 rtl:ml-2 cursor-pointer hover:opacity-75"
+                defaultImage="assets/images/default.jpg" lazyLoad="assets/images/close.webp"
+                [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+        </div>
+        <div class="cancel-link ltr:pl-5 rtl:pr-5" (click)="toggleSearch(false)">
+            {{'Cancel' | translate}}
+        </div>
+    </div>
+    <div>
+        <div *ngIf="getFiltteredData().length == 0" class="no-results p-3">
+            <div class="title-res">
+                {{'No Matching Results' | translate}}
+            </div>
+            <div class="description">
+                {{"We're sorry but we could not find any items matching your search query." | translate }}
+            </div>
+        </div>
+        <div *ngIf="getFiltteredData().length > 0" class="px-4 overflow-auto h-[90vh]">
+            <app-product *ngFor="let product of getFiltteredData()" class="w-full lg:w-[calc(50%-1rem)]"
+                [product]="product">
+            </app-product>
+        </div>
+    </div>
+</div>

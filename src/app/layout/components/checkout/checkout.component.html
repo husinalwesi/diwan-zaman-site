@@ -1,0 +1,77 @@
+<form #form="ngForm" novalidate (ngSubmit)="continue(form)">
+    <div class="min-h-screen h-full" style="display: flex;
+flex-direction: column;">
+        <div class="flex flex-1 items-center justify-center">
+            <div class="flex flex-col px-4">
+                <p class="text-2xl text-white mt-12 text-center">
+                    {{'Contact information' | translate}}
+                </p>
+                <div class="mt-12">
+                    <p class="text-sm text-white">{{'Choose a delivery method' | translate}}</p>
+                    <div class="flex justify-between mt-3 payment-method">
+                        <div class="w-[calc(50%-0.5rem)]">
+                            <a href="javascript:void(0);" (click)="selectedDeliveryMethod = 'delivery'; address = ''"
+                                [class.active]="selectedDeliveryMethod == 'delivery'">
+                                <img defaultImage="assets/images/default.jpg" class="w-full h-full"
+                                    lazyLoad="assets/images/delivery-checkout.webp" [errorImage]="'' | errorImage"
+                                    [useSrcset]="true" alt="image" />
+                            </a>
+                        </div>
+                        <div class="w-[calc(50%-0.5rem)]">
+                            <a href="javascript:void(0);" (click)="selectedDeliveryMethod = 'direct'; address = ''"
+                                [class.active]="selectedDeliveryMethod == 'direct'">
+                                <img defaultImage="assets/images/default.jpg" lazyLoad="assets/images/direct.webp"
+                                    class="w-full h-full" [errorImage]="'' | errorImage" [useSrcset]="true"
+                                    alt="image" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <div class="flex flex-col gap-1.5">
+                        <label for="fullName" class="text-sm text-white">{{'Full Name' | translate}}</label>
+                        <input type="text" required minlength="3" name="fullName" [(ngModel)]="fullName" class="input"
+                            [placeholder]="'Full Name' | translate"
+                            [class.error]="isSubmit && !form.controls.fullName?.valid" />
+                        <span *ngIf="isSubmit && !form.controls.fullName?.valid"
+                            class="block text-[#e83d3d] mt-0.5 ltr:text-right rtl:text-left ltr:text-sm rtl:text-xs font-DINRegular">{{'THIS_FIELD_IS_REQUIRED'
+                            |translate}}</span>
+                    </div>
+                    <div class="flex flex-col gap-1.5 mt-6" *ngIf="selectedDeliveryMethod == 'delivery'">
+                        <label for="address" class="text-sm text-white">{{'Address' | translate}}</label>
+                        <input type="text" required minlength="3" name="address" [(ngModel)]="address" class="input"
+                            [placeholder]="'Address' | translate"
+                            [class.error]="isSubmit && !form.controls.address?.valid" />
+                        <span *ngIf="isSubmit && !form.controls.address?.valid"
+                            class="block text-[#e83d3d] mt-0.5 ltr:text-right rtl:text-left ltr:text-sm rtl:text-xs font-DINRegular">{{'THIS_FIELD_IS_REQUIRED'
+                            |translate}}</span>
+                    </div>
+                    <div class="mt-6">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-sm text-white">{{'Phone Number' | translate}}</label>
+                            <app-phone #phone1 style="direction: ltr;" [isSubmit]="isSubmit"></app-phone>
+                            <p class="verify-sub-title max-w-[340px]">
+                                {{'We will send a verification code to this mobile number to verify your account' |
+                                translate}}
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-1.5 mt-6">
+                            <label class="text-sm text-white">{{'Second Phone Number' | translate}}</label>
+                            <app-phone #phone2 style="direction: ltr;" [isSubmit]="isSubmit"></app-phone>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="h-40"></div>
+        <div class="fixed bg-[#1b1c21] bottom-0 left-auto right-auto w-full text-center py-6 max-w-[853px]"
+            style="    margin-top: auto;    box-shadow: 0px -8px 8px -8px rgb(0 0 0 / 20%);">
+            <button type="submit"
+                class="flex flex-row py-[9px] gap-2 bg-[#F13D5D] hover:bg-[#ff1744] w-full rounded-md max-w-[350px] lg:max-w-[400px] items-center px-4 text-center justify-center text-white h-12"
+                style="    width: 90%;
+margin: 0 auto;    font-size: 16px;">
+                {{'Place order' | translate}}
+            </button>
+        </div>
+    </div>
+</form>

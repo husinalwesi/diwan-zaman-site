@@ -1,0 +1,130 @@
+<ng-template #modal>
+    <div class="modal-body transition-all duration-500 pb-12 pt-4 px-4">
+        <p style="    font-weight: bold;
+        font-size: 1.5rem;    margin-bottom: 1.25rem;" class="text-white">{{'Share link' | translate}}</p>
+        <ul class="flex gap-1">
+            <li *ngFor="let item of share" class="w-[calc((100%/4)-1rem)] flex-1" (click)="handleClick(item)">
+                <div class="flex flex-col justify-center items-center cursor-pointer">
+                    <div>
+                        <img defaultImage="assets/images/default.jpg" [lazyLoad]="item.img" class="w-[50px] h-[50px]"
+                            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+                    </div>
+                    <div>
+                        <span class="block text-[#D6D6D6] mt-2" style="    font-size: 1rem;
+                        font-weight: 400">{{item.text | translate}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+<app-modal [modalTemplate]="modal"></app-modal>
+
+
+
+
+
+<div class="pb-24 min-h-screen" *ngIf="product">
+    <div>
+        <!-- <div viewFullImage [extraSource]="product.image" class="h-[240px] w-full back-img"
+            [ngStyle]="{ 'background-image': 'url(' + product.image + ')'}"></div> -->
+
+        <div viewFullImage [extraSource]="product.image" style="background-image: url('assets/images/default-detailed-page.webp');"
+            [lazyLoad]="product.image" class="h-[240px] w-full back-img"></div>
+
+
+
+        <!-- <img viewFullImage defaultImage="assets/images/default-product.webp" [lazyLoad]="product.image"
+            [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" class="h-[240px] w-full" /> -->
+    </div>
+    <div>
+        <div class="mb-2 px-8 flex flex-col lg:flex-row gap-0 lg:gap-4 items-start lg:items-center my-8">
+            <h1 class="flex-1" style="    font-size: 20px;
+            color: #D6D6D6;
+            font-weight: 600;">
+                {{language === "en" ? product.title_en : product.title_ar}}
+            </h1>
+            <div class="ltr:text-left ltr:lg:text-right   rtl:text-right rtl:lg:text-left">
+                <div class="">
+                    <span *ngIf="product.price > 0" style="    font-size: 20px;color: #F13D5D;">{{product.price |
+                        formatNumber}} {{'JD' |
+                        translate}}</span>
+                    <span *ngIf="product.price == 0" style="    font-size: 20px;color: #F13D5D;">{{'Price/unit' |
+                        translate}}</span>
+
+                </div>
+                <span class="custom-label" style="    font-size: 14px;color: #D6D6E5;font-weight: 400;">
+                    {{language === "en" ? product.desc2_en : product.desc2_ar}}</span>
+            </div>
+        </div>
+        <div>
+            <div class="px-8 my-4">
+                <a href="javascript:void(0);" class="inline-block" (click)="showShare()">
+
+                    <div class="flex gap-2 items-center">
+                        <span class="text-[#D6D6D6]" style="    font-weight: bold;">{{'Share' | translate}}</span>
+                        <img defaultImage="assets/images/default.jpg" lazyLoad="assets/images/share.png"
+                            class="w-[22.5px]" [errorImage]="'' | errorImage" [useSrcset]="true" alt="image" />
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="px-8">
+            <p class=" mb-7" style="    font-size: 14px;
+            color: #A0A0A0;">{{language === "en" ? product.desc1_en : product.desc1_ar}}</p>
+        </div>
+        <div>
+            <hr class="border-[#37383D]" />
+        </div>
+        <ng-container *ngIf="product.unitsDetails.length > 0">
+            <div class="px-8 mt-7 mb-6">
+                <p class="text-white" style="    font-weight: 600;font-size: 1rem;">{{'Your Choice' | translate}}
+                    <span class="text-[#A0A0A0]">({{'required' | translate}})</span>
+                </p>
+            </div>
+            <div class="px-8">
+                <ul class="flex flex-col gap-4">
+                    <li *ngFor="let item of product.unitsDetails"
+                        class="flex justify-between border-b border-[#37383D] pb-3 w-full hover:border-white">
+                        <div class="flex flex-row gap-2 w-full flex-1 whitespace-nowrap">
+                            <label class="container ltr:pl-[35px] rtl:pr-[35px] text-white" style="    font-size: 1rem;
+                            font-weight: 400;">
+                                <span>{{language === "en" ? item.title_en : item.title_ar}}</span>
+                                <input [class.checked]="item.id == selection" [value]="item.id" type="checkbox"
+                                    (change)="changeSelection(item.id)" />
+                                <span class="checkmark ltr:left-0 rtl:right-0"></span>
+                            </label>
+                            <!-- <input type="radio" [(ngModel)]="selection" [value]="item.id"
+                                (change)="changeSelection()" />
+                            <span class="text-white" style="    font-size: 1rem;
+                            font-weight: 400;">{{item.title}}</span> -->
+                        </div>
+                        <p class="text-[#F13D5D]">+ {{item.price | formatNumber}} {{'JD' | translate}}</p>
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+        <div class="px-8 flex flex-col mb-16 lg:mb-12 mt-12 lg:mt-6">
+            <label for="notes" class="text-white mb-2.5" style="font-weight: 600; font-size: 1rem;">{{'Notes' |
+                translate}}</label>
+            <textarea class="text-white" name="notes" id="notes" [(ngModel)]="notes" (keyup)="noteChange($event)" style="    border: solid 2px #37383D;
+            border-radius: 8pt;
+            padding: 8pt;
+            width: 100%;
+            background-color: #25262B;height: 56px;
+    display: flex;
+    align-items: center;color: #A0A0A0"></textarea>
+        </div>
+        <div>
+            <hr class="border-[#37383D]" />
+        </div>
+        <div class="px-8 py-8 flex flex-row justify-between items-center">
+            <div>
+                <p class="text-white" style="font-weight: 600;
+                font-size: 16px;
+                color: #D6D6D6;">{{'Quantity' | translate}}</p>
+            </div>
+            <app-counter [counter]="counter" (plusEmiter)="plus($event)" (minusEmiter)="minus($event)"></app-counter>
+        </div>
+    </div>
+</div>

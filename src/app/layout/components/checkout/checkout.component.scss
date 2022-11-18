@@ -1,0 +1,29 @@
+.verify-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #D6D6D6;
+    text-align: center;
+}
+.verify-sub-title {
+    color: #A0A0A0;
+    font-size: 12px;
+}
+.input{
+    background-color: #25262B;
+    color: #A0A0A0;
+    border-radius: 4pt;
+    font-size: 14px;
+    height: 48px;
+    @apply px-4 w-full max-w-[340px] border border-solid border-[#37383D];
+    &.error {
+        @apply border-[#e83d3da1];
+    }
+} 
+.payment-method img{
+    background-color: #25262b;
+    border: 1px solid #37383D;
+    border-radius: 50%;
+}
+.payment-method a.active img{
+    border: 1px solid #f13d5d;
+}

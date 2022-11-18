@@ -1,0 +1,13 @@
+<div class="min-h-screen h-full px-4" style="display: flex;
+flex-direction: column;">
+    <h1 class="title text-white">
+        {{page | translate}}
+    </h1>
+    <div class="content text-[#D6D6D6]" [innerHtml]="content">
+    </div>
+    <div class="text-center py-6" style="    margin-top: auto;">
+        <button type="button" routerLink="/" class="w-full">
+            {{'Back' | translate}}
+        </button>
+    </div>
+</div>

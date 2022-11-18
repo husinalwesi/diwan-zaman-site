@@ -1,0 +1,25 @@
+::ng-deep .modal {
+    @apply fixed inset-0 z-[1050] hidden overflow-hidden outline-none bg-black opacity-0 transition-all;
+    & .modal-dialog {
+        @apply pointer-events-none w-auto relative -translate-y-1/4 transition-all h-full flex;
+        & .modal-content {
+            @apply bg-clip-padding relative flex flex-col w-full max-w-[500px] m-auto rounded-md pointer-events-auto bg-[#25262B] outline-none transition-all;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+            & .modal-header {
+                @apply flex items-start justify-between p-4 border-b border-solid border-[#e9ecef] rounded-tl-sm rounded-tr-sm;
+            }
+            & .modal-body {
+                @apply relative flex-1;
+            }
+            & .modal-footer {
+                @apply flex items-center justify-end p-4 border-t border-solid border-[#e9ecef];
+            }
+        }
+    }
+    &.show {
+        @apply block opacity-100 overflow-x-hidden overflow-y-auto bg-opacity-50;
+        & .modal-dialog {
+            @apply translate-x-0 translate-y-0;
+        }
+    }
+}

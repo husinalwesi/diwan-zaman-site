@@ -1,0 +1,7 @@
+<div *ngIf="isModalEnabled" class="modal show" (click)="hideModal()">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" stopBubble>
+            <ng-container *ngTemplateOutlet="modalTemplate"></ng-container>
+        </div>
+    </div>
+</div>
